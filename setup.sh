@@ -48,7 +48,7 @@ sudo gem install --silent fusuma
     echo "Installing Howdy"
     sudo add-apt-repository ppa:boltgolt/howdy -y > /dev/null 2>&1
     sudo apt update -qq
-    sudo apt install howdy -y; break;;
+    sudo apt install howdy -y; #break;;
 #    n|N ) 
 #    echo "Skipping Install of Howdy"; break;;
 #    * ) echo "invalid";;
