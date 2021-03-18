@@ -37,3 +37,5 @@ Upgrade Ubuntu to 20.04 before executing this script.
 - Spotify
 - VLC
 - GIMP
+
+Original script: https://github.com/jules-ch/Ubuntu20-Setup-XPS13/blob/master/setup.sh (thanks!)
