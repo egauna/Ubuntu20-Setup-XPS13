@@ -4,7 +4,7 @@
 wget https://raw.githubusercontent.com/fzybunslpr/Ubuntu20-Setup-XPS13/master/setup.sh && sudo chmod +x setup.sh && ./setup.sh
 ```
 
-## Prerequisistes
+## Prerequisites
 
 XPS 9300 comes with Bionic Beaver 18.04 pre-installed. 
 Upgrade Ubuntu to 20.04 before executing this script.
