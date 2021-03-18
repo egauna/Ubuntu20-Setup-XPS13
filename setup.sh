@@ -41,19 +41,19 @@ sudo apt install libinput-tools xdotool ruby -y -qq
 sudo gem install --silent fusuma
 
 # Install Howdy for facial recognition
-while true; do
-  read -p "Facial recognition with Howdy (y/n)?" choice
-  case "$choice" in 
-    y|Y ) 
+#while true; do
+#  read -p "Facial recognition with Howdy (y/n)?" choice
+#  case "$choice" in 
+#    y|Y ) 
     echo "Installing Howdy"
     sudo add-apt-repository ppa:boltgolt/howdy -y > /dev/null 2>&1
     sudo apt update -qq
     sudo apt install howdy -y; break;;
-    n|N ) 
-    echo "Skipping Install of Howdy"; break;;
-    * ) echo "invalid";;
-  esac
-done
+#    n|N ) 
+#    echo "Skipping Install of Howdy"; break;;
+#    * ) echo "invalid";;
+#  esac
+#done
 
 # Remove packages:
 
@@ -122,6 +122,7 @@ sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microso
 #   $(lsb_release -cs) \
 #   stable" > /dev/null 2>&1
 #sudo apt update -qq && sudo apt install docker-ce docker-ce-cli docker-compose containerd.io code -y
+sudo apt update -qq && sudo apt install code -y
 
 ## Post installation for docker
 
