@@ -26,8 +26,8 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F9FDA6BED73CDC22
 sudo apt update -qq
 
 # Install general utilities
-sudo apt install git htop net-tools flatpak \
-vim vlc gnome-tweaks ubuntu-restricted-extras \
+sudo apt install git flatpak vim vlc \ 
+gnome-tweaks ubuntu-restricted-extras \
 gnome-tweak-tool synaptic -y -qq
 
 # Install drivers
@@ -39,46 +39,43 @@ sudo apt install libinput-tools xdotool ruby -y -qq
 sudo gem install --silent fusuma
 
 # Install Howdy for facial recognition
-while true; do
-  read -p "Facial recognition with Howdy (y/n)?" choice
-  case "$choice" in 
-    y|Y ) 
-    echo "Installing Howdy"
-    sudo add-apt-repository ppa:boltgolt/howdy -y > /dev/null 2>&1
-    sudo apt update -qq
-    sudo apt install howdy -y; break;;
-    n|N ) 
-    echo "Skipping Install of Howdy"; break;;
-    * ) echo "invalid";;
-  esac
-done
+sudo add-apt-repository ppa:boltgolt/howdy -y > /dev/null 2>&1
+sudo apt update -qq
+sudo apt install howdy -y;
 
 # Remove packages:
 sudo apt remove rhythmbox -y -q
 
 # Add Flatpak support:
-sudo apt install gnome-software-plugin-flatpak -y
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+#sudo apt install gnome-software-plugin-flatpak -y
+#sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Add Plata-theme
+sudo add-apt-repository ppa:tista/plata-theme -y > /dev/null 2>&1
+sudo apt update -qq && sudo apt install plata-theme -y
+
+gsettings set org.gnome.desktop.interface gtk-theme "Plata-Noir-Compact"
+gsettings set org.gnome.desktop.wm.preferences theme "Plata-Noir-Compact"
 
 # Enable Shell Theme
 sudo apt install gnome-shell-extensions -y
+gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
+gsettings set org.gnome.shell.extensions.user-theme name "Plata-Noir-Compact"
 
-# Setup Development tools
+# Install fonts
+sudo apt install fonts-firacode fonts-open-sans -y -qq
+
+gsettings set org.gnome.desktop.interface font-name 'Open Sans 12'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Fira Code 13'
 
 ## Add Java JDK LTS
 sudo apt install openjdk-11-jdk -y
-
-sudo apt install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg-agent \
-    software-properties-common -y -q
 
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /tmp/packages.microsoft.gpg
 sudo install -o root -g root -m 644 /tmp/packages.microsoft.gpg /usr/share/keyrings/
 sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
+sudo apt update -qq && sudo apt install code -y
 
 ## Post installation for code (sensible defaults)
 code --install-extension visualstudioexptteam.vscodeintellicode
@@ -90,15 +87,15 @@ sudo flatpak install postman -y
 echo "Installing Node 14 JS LTS"
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs 
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list 
-sudo apt-get update -qq && sudo apt-get install -y yarn
+
+# Setup GNOME material shell (Need node for compilation)
+git clone https://github.com/PapyElGringo/material-shell.git ~/material-shell || true
+make -C ~/material-shell/ install
 
 ## Chat
 sudo flatpak install discord -y
 
 ## Multimedia
-sudo apt install -y gimp
 sudo flatpak install spotify -y
 
 # Sublime Text
@@ -120,6 +117,9 @@ sudo apt install ffmpeg
 sudo add-apt-repository ppa:obsproject/obs-studio
 sudo apt update
 sudo apt install obs-studio
+
+# Flameshot
+sudo apt install flameshot
 
 # Gotta reboot now:
 sudo apt update -qq && sudo apt upgrade -y && sudo apt autoremove -y
