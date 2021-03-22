@@ -26,9 +26,7 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F9FDA6BED73CDC22
 sudo apt update -qq
 
 # Install general utilities
-sudo apt install git flatpak vim vlc \ 
-gnome-tweaks ubuntu-restricted-extras \
-gnome-tweak-tool synaptic -y -qq
+sudo apt install git flatpak vim vlc gnome-tweaks ubuntu-restricted-extras gnome-tweak-tool -y -qq
 
 # Install drivers
 sudo apt install oem-somerville-melisa-meta libfprint-2-tod1-goodix oem-somerville-meta tlp-config -y
@@ -81,10 +79,9 @@ sudo apt update -qq && sudo apt install code -y
 code --install-extension visualstudioexptteam.vscodeintellicode
 code --install-extension eamodio.gitlens
 
-sudo flatpak install postman -y
+#sudo flatpak install postman -y
 
 # Node Install
-echo "Installing Node 14 JS LTS"
 curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
 sudo apt-get install -y nodejs 
 
@@ -93,10 +90,10 @@ git clone https://github.com/PapyElGringo/material-shell.git ~/material-shell ||
 make -C ~/material-shell/ install
 
 ## Chat
-sudo flatpak install discord -y
+#sudo flatpak install discord -y
 
 ## Multimedia
-sudo flatpak install spotify -y
+#sudo flatpak install spotify -y
 
 # Sublime Text
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -123,5 +120,3 @@ sudo apt install flameshot
 
 # Gotta reboot now:
 sudo apt update -qq && sudo apt upgrade -y && sudo apt autoremove -y
-
-echo $'\n'$"Ready for REBOOT"
